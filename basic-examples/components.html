@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Fundamentals</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.18.9/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+
+    <script defer type="text/babel">
+      const rootElement = document.querySelector('#root');
+      const root = ReactDOM.createRoot(rootElement);
+
+      // Usar mayúscula en JSX es lo mismo que hacer React.createElement
+      const Message = (props) => <div className="message">{props.msg}</div>;
+      const element = (
+        <div className="container">
+          <Message msg="Hello World"></Message>
+          <Message msg="Goodbye World"></Message>
+        </div>
+      );
+
+      // VALIDAR PROPS - PROPTYPES
+      function SayHello({ firstName, lastName }) {
+        return (
+          <div>
+            Hello {firstName} {lastName}
+          </div>
+        );
+      }
+      SayHello.propTypes = {
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+      };
+      // Hacer esto es tan comun que ya existe un paquete para ello
+
+      const element2 = <SayHello firstName={false} />;
+
+      root.render(element2);
+    </script>
+  </body>
+</html>

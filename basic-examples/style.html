@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Fundamentals</title>
+
+    <style>
+      .box {
+        border: 1px solid #333;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .box--large {
+        width: 270px;
+        height: 270px;
+      }
+
+      .box--medium {
+        width: 180px;
+        height: 180px;
+      }
+
+      .box--small {
+        width: 90px;
+        height: 90px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.18.9/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+
+    <script defer type="text/babel">
+      const rootElement = document.querySelector('#root');
+      const root = ReactDOM.createRoot(rootElement);
+
+      function Box({ className = '', style, size, ...rest }) {
+        const sizeClassName = size ? `box--${size}` : '';
+        return <div className={`box ${className} ${sizeClassName}`} style={{ fontStyle: 'italic', ...style }} {...rest} />;
+      }
+
+      const element = (
+        <div>
+          <Box size="small" style={{ backgroundColor: 'lightblue' }}>
+            small lightblue box
+          </Box>
+          <Box size="medium" style={{ backgroundColor: 'pink' }}>
+            medium lightblue box
+          </Box>
+          <Box size="large" style={{ backgroundColor: 'orange' }}>
+            large lightblue box
+          </Box>
+        </div>
+      );
+
+      root.render(element);
+    </script>
+  </body>
+</html>

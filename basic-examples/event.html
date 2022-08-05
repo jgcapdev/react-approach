@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Fundamentals</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.18.9/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+
+    <script defer type="text/babel">
+      const rootElement = document.querySelector('#root');
+      const root = ReactDOM.createRoot(rootElement);
+
+      const state = { eventCount: 0, username: '' };
+
+      function App() {
+        function handleClick() {
+          setState({ eventCount: state.eventCount + 1 });
+        }
+        function handleChange() {
+          setState({ username: event.target.value });
+        }
+
+        return (
+          <div>
+            <p>There have been {state.eventCount} events.</p>
+            <p>
+              <button onClick={handleClick}>Click Me</button>
+            </p>
+            <p>You typed: {state.username}</p>
+            <p>
+              <input onChange={handleChange} />
+            </p>
+          </div>
+        );
+      }
+
+      function setState(newState) {
+        Object.assign(state, newState);
+        renderApp();
+      }
+
+      function renderApp() {
+        root.render(<App />);
+      }
+
+      renderApp();
+    </script>
+  </body>
+</html>

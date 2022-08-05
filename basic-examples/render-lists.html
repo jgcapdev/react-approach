@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Fundamentals</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.18.9/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+
+    <script defer type="text/babel">
+      const rootElement = document.querySelector('#root');
+      const root = ReactDOM.createRoot(rootElement);
+
+      const allItems = [
+        { id: 'a', value: 'apple' },
+        { id: 'o', value: 'orange' },
+        { id: 'p', value: 'grape' },
+        { id: 'g', value: 'pear' },
+      ];
+
+      function App() {
+        const [items, setItems] = React.useState(allItems);
+
+        function addItem() {
+          setItems([...items, allItems.find((i) => !items.includes(i))]);
+        }
+
+        function removeItem(item) {
+          setItems(items.filter((i) => i !== item));
+        }
+
+        return (
+          <div>
+            <button disabled={items.length >= allItems.length} onClick={addItem}>
+              add item
+            </button>
+            <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
+              {items.map((item) => (
+                <li key={item.id}>
+                  <button onClick={() => removeItem(item)}>remove</button>
+                  <label htmlFor="{`${item.value}`}-input">{item.value}</label>
+                  <input id={`${item.value}-input`} defaultValue={item.value} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      }
+
+      root.render(<App />);
+    </script>
+  </body>
+</html>

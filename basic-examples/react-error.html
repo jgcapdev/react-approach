@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Fundamentals</title>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.18.9/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+
+    <script defer type="text/babel">
+      const rootElement = document.querySelector('#root');
+      const root = ReactDOM.createRoot(rootElement);
+
+      // Todo esto lo podríamos hacer con el packete react-error-boundary
+      class ErrorBoundary extends React.Component {
+        state = { error: null };
+        static getDerivedStateFromError(error) {
+          return { error };
+        }
+
+        render() {
+          const { error } = this.state;
+          if (error) {
+            return <this.props.FallbackComponent error={error} />;
+          }
+          return this.props.children;
+        }
+      }
+
+      function ErrorFallback({ error }) {
+        return (
+          <div>
+            <p>Something went wrong</p>
+            <pre>{error.message}</pre>
+          </div>
+        );
+      }
+
+      function Bomb() {
+        throw new Error('Boom');
+      }
+
+      function App() {
+        const [explode, setExplode] = React.useState(false);
+
+        return (
+          <div>
+            <div>
+              <button onClick={() => setExplode(true)}>Explode</button>
+            </div>
+            <div>
+              <ErrorBoundary FallbackComponent={ErrorFallback}>{explode ? <Bomb /> : 'Push the button!'}</ErrorBoundary>
+            </div>
+          </div>
+        );
+      }
+
+      root.render(<App />);
+    </script>
+  </body>
+</html>
