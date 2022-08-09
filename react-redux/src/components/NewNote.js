@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { createNote } from '../reducers/noteReducer.js';
+import { createNote } from '../redux/actions.js';
 
 const NewNote = () => {
   const dispatch = useDispatch();
@@ -8,7 +8,7 @@ const NewNote = () => {
     e.preventDefault();
     const content = e.target.note.value;
 
-    dispatch(createNote(e.target.note.value));
+    dispatch(createNote(content));
     e.target.note.value = '';
   };
 

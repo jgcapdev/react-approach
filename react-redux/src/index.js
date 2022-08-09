@@ -5,9 +5,9 @@ import App from './App';
 
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import { noteReducer } from './reducers/noteReducer';
+import { noteReducer } from './redux/reducers/noteReducer';
 
-import { compose, createStore } from 'redux';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 const store = createStore(noteReducer, composeWithDevTools());

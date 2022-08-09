@@ -1,17 +1,10 @@
-export const noteReducer = (state = [], action) => {
-  switch (action.type) {
-    case '@notes/created':
-      return [...state, action.payload];
-    default:
-      return state;
-  }
-};
+import { ADD_NOTE } from './actionTypes';
 
 const generateId = () => Math.floor(Math.random() * 999999999) + 1;
 
 export const createNote = (content) => {
   return {
-    type: '@notes/created',
+    type: ADD_NOTE,
     payload: {
       content,
       important: true,
