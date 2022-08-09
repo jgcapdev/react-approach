@@ -8,6 +8,8 @@ const NewNote = () => {
     e.preventDefault();
     const content = e.target.note.value;
 
+    if (content === '') return;
+
     dispatch(createNote(content));
     e.target.note.value = '';
   };
