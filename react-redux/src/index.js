@@ -3,14 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
-import { composeWithDevTools } from 'redux-devtools-extension';
-
-import { noteReducer } from './redux/reducers/noteReducer';
-
-import { createStore } from 'redux';
+import { store } from './store.js';
 import { Provider } from 'react-redux';
-
-const store = createStore(noteReducer, composeWithDevTools());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
